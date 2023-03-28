@@ -2,7 +2,7 @@
 #include <string.h>
 char stack[51];
 char s[51];
-int top = -1;
+int top = 0;
 
 void push(char s)
 {
@@ -16,7 +16,7 @@ void pop(char s)
 
 int empty()
 {
-	if (top == -1)
+	if (top == 0)
 		return 1;
 	else
         return 0;
@@ -28,7 +28,7 @@ int main(void)
 	scanf("%d", &t);
 	while (t--)
 	{
-		top = -1;
+		top = 0;
 		scanf("%s", s);
 		len = strlen(s);
 		for (int i = 0; i < len; i++)
