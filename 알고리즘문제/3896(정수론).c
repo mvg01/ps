@@ -23,19 +23,19 @@ int main()
 	for (i = 0; i < t; i++) {
 		scanf("%d", &k);
 		int j, c = 1;
-		if (a[k] != 0)
+		if (a[k] != 0)  // k가 소수이면 그냥 0
 		{
 			printf("0\n");
 			continue;
 		}
 
-		for (j = k; j >= 2; j--)
+		for (j = k; j >= 2; j--)  //k가 합성수일 때 k보다 작은 소수를 j
 		{
 			if (a[j] != 0)
 				break;
 		}
 
-		for (int l = j + 1; l <= 1299709; l++)
+		for (int l = j + 1; l <= 1299709; l++) //소수가 나올때까지 count 값을 늘려준다. c=1에서 시작 (j가 소수이기 때문)
 		{
 			if (a[l] == 0)
 				c++;
