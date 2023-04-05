@@ -1,5 +1,6 @@
 #include <stdio.h>
 #define MIN(a,b)(a<b?a:b)  //#define 괄호 안쳐서 1시간 해맴 까먹지 않기
+
 int red[1001];
 int green[1001];
 int blue[1001];
