@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 char revs[2601][51];  // 51*51 
-int main()
+int main(void)
 {
 	int i, j, len, idx = 0;  
 	char s[51];
