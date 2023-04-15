@@ -42,3 +42,47 @@ int main(void)
 	}
 	return 0;
 }
+
+// 반복문으로 구현하는 이분탐색
+#include <stdio.h>
+#include <stdlib.h>
+int a[100001];
+int static compare(int* a, int* b)
+{
+	if (*a > *b)
+		return 1;
+	else if (*a < *b)
+		return -1;
+	else
+		return 0;
+}
+int main()
+{
+	int n, m, M;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &a[i]);
+	scanf("%d", &M);
+	qsort(a, n, 4, compare); 
+
+	for (int i = 0; i < M; i++)
+	{
+		scanf("%d", &m);
+		int start = 0, end = n - 1, chk = 0;
+		while (start <= end)
+		{
+			int mid = (start + end) / 2;
+			if (a[mid] == m) {
+				printf("1\n");
+				chk = 1;
+				break;
+			}
+			else if (a[mid] > m)
+				end = mid - 1;
+			else
+				start = mid + 1;
+		}
+		if (chk == 0)  
+			printf("0\n");
+	}
+}
