@@ -3,19 +3,17 @@
 
 typedef struct Graph {
 	int n;
-	int mat[101][101];
+	int** mat;
 }GraphType;
 
-void init(GraphType* g, int k) {
-	g->n = k;
-	for (int i = 1; i <= k; i++) {
-		for (int j = 1; j <= k; j++) {
-			g->mat[i][j] = 0;
-		}
-	}
+void init(GraphType* g, int num) {
+	g->n = num;
+	g->mat = (int**)malloc(sizeof(int*) * (num + 1));
+	for (int i = 0; i <= num; i++)
+		g->mat[i] = (int*)calloc(num + 1, sizeof(int));
 }
 
-void insert_edge(GraphType* g, int s,int e) {
+void insert_edge(GraphType* g, int s, int e) {
 	g->mat[s][e] = 1;
 	g->mat[e][s] = 1;
 }
@@ -45,4 +43,7 @@ int main()
 	}
 	dfs(&g, 1);
 	printf("%d", cnt);
+	for (int i = 0; i <= n; i++)
+		free(g.mat[i]);
+	free(g.mat);
 }
