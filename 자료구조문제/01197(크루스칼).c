@@ -62,12 +62,12 @@ int static c(Edge* a, Edge* b)
 
 int res = 0;
 void kruskal(Graph* g, int n) {
-	init_parent(n);   //정점의 개수만큼 초기화
+	init_parent();
 	qsort(g->list, g->n, sizeof(g->list[0]), c);  //가중치 오름차순 정렬
 	Edge temp;
 	int kr_cnt = 0, idx = 0;
 	int s, e;
-	while (kr_cnt != n-1) {
+	while (kr_cnt != n - 1) {
 		temp = g->list[idx++];
 		s = temp.start;
 		e = temp.end;
