@@ -8,9 +8,9 @@ int main()
 	cin.tie(NULL);
 	int n, star;
 	string p;
+    string front, back;
 	cin >> n;
 	cin >> p;
-	string front, back;
 	for (int i = 0; ; i++) {
 		if (p.at(i) != '*')
 			front.push_back(p.at(i));
