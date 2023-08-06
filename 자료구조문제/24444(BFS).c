@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 int n;
 int* visited;
 int* res;
