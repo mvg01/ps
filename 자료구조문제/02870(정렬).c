@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 char res[5050][101];
-
 int static compare(char* a, char* b)
 {
 	if (strlen(a) > strlen(b))
