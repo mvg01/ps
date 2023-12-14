@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "string.h": "c",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "iostream": "cpp"
     }
 }
