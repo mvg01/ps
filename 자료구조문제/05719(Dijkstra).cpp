@@ -2,6 +2,16 @@
 #define INF 999999999
 using namespace std;
 
+/*
+ 일단 최단 경로를 구한다. 
+첫번째 dijkstra 함수 : 최단경로를 구하면서 temp에 정점 정보를 저장해둔다. 
+최단경로가 여러 개인 경우 확인
+bfs로 최단경로 (정점 to 정점) 을 visited로 방문처리 해준다.
+
+ 두번째 dijkstra 과정
+방문처리된 간선이라면 최단경로에 포함된 간선이므로 거리 비교를 하지 않고 구해준다.
+ */
+
 int n, m, s, d;
 int dis[501];
 bool visited[501][501];  // 최단경로의 정보 저장
@@ -28,7 +38,7 @@ void dijkstra() {
                 temp[next_ver].push_back(ver);
                 pq.push({ dist + w,next_ver });
             }
-            else if (dis[next_ver] == dist + w) {
+            else if (dis[next_ver] == dist + w) {  // 최단경로가 여러개인 경우도 있다.
                 temp[next_ver].push_back(ver);
             }
         }
@@ -52,7 +62,7 @@ void remove_shortest_path() {
 }
 
 void solve() {
-    dijkstra();
+    dijkstra(); 
     remove_shortest_path();
     dijkstra();
     if (dis[d] != INF)
