@@ -2,52 +2,47 @@
 using namespace std;
 
 int n, p[1001], vis[1001];
-char t[1001];
-vector<int>v[1001];
+vector<pair<char, int>>t;  // 방의 정보 (문과 금액)
+vector<int>v[1001];  // 연결된 방 리스트
 
 void solve() {
-    bool chk = 0;
     queue<pair<int, int>>q;
-    q.push({ 1,0 });
-    vis[1] = 0;
+    q.push({ 0,0 });
+    vis[0] = 0;
+    v[0].push_back(1);
     while (q.size()) {
-        int r = q.front().first;
-        int m = q.front().second;
+        int r = q.front().first;  // 연결된 방의 번호
+        int m = q.front().second;  // 연결된 방의 금액 
         q.pop();
         if (r == n) {
-            if (t[r] == 'T') {
-                if (m >= p[r]) {
-                    chk = 1;
-                    break;
-                }
-            }
-            else {
-                chk = 1;
-                break;
-            }
+            cout << "Yes\n";
+            return;
         }
         for (int i = 0; i < v[r].size(); i++) {
-            if (t[r] == 'E') {
-                if (vis[v[r][i]] < m) {
-                    vis[v[r][i]] = m;
-                    q.push({ v[r][i],m });
+            int next = v[r][i];
+            char room_type = t[next - 1].first;
+            int w = t[next - 1].second;
+            if (room_type == 'E') {
+                if (vis[next] < m) {
+                    vis[next] = m;
+                    q.push({ next,m });
                 }
             }
-            else if (t[r] == 'L') {
-                if (vis[v[r][i]] < max(m, p[r])) {
-                    vis[v[r][i]] = max(m, p[r]);
-                    q.push({ v[r][i],vis[v[r][i]] });
+            else if (room_type == 'L') {
+                if (vis[next] < max(m, w)) {
+                    vis[next] = max(m, w);
+                    q.push({ next,vis[next] });
                 }
             }
-            else if (t[r] == 'T') {
-                if (m >= p[v[r][i]] && vis[v[r][i]] < m - p[v[r][i]]) {
-                    vis[v[r][i]] = m - p[v[r][i]];
-                    q.push({ v[r][i],vis[v[r][i]] });
+            else if (room_type == 'T') {
+                if (m >= w && vis[next] <= m - w) {
+                    vis[next] = m - w;
+                    q.push({ next,vis[next] });
                 }
             }
         }
     }
-    cout << ((chk) ? "Yes\n" : "No\n");
+    cout << "No\n";
 }
 
 void input() {
@@ -58,12 +53,13 @@ void input() {
             vis[i] = -1;
             v[i].clear();
         }
+        t.clear();
         for (int i = 1; i <= n; i++) {
-            char c;
-            cin >> c >> p[i];
-            t[i] = c;
+            char y;
+            int x;
+            cin >> y >> x;
+            t.push_back({ y,x });
             while (1) {
-                int x;
                 cin >> x;
                 if (x == 0)
                     break;
