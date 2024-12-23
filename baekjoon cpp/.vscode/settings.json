@@ -2,6 +2,7 @@
     "files.associations": {
         "*.erd": "json",
         "*.vuerd": "json",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     }
 }
