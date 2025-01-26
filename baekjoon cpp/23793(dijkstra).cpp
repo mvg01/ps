@@ -15,6 +15,8 @@ void dijkstra(int start) {
         int d = pq.top().first;
         int ver = pq.top().second;
         pq.pop();
+        if (dis[ver] < d)
+            continue;
         for (int i = 0; i < mat[ver].size(); i++) {
             int nxt_ver = mat[ver][i].first;
             int nxt_d = mat[ver][i].second;
