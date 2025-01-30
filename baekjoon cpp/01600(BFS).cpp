@@ -15,8 +15,7 @@ void solve() {
         q.pop();
         if (y == h - 1 && x == w - 1) {  
             // 목표지점 도착시, 비용을 능력써서 간 비용으로 최대한 전환
-            int used = min(kk, cnt / 3); // 말 이동으로 대체 가능한 횟수
-            int ans = used + (cnt / 3 - used) * 3 + (cnt % 3);
+            int ans = kk + (cnt / 3 - kk) * 3 + (cnt % 3);
             cout << ans;
             return;
         }
