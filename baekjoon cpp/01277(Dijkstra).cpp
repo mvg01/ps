@@ -65,4 +65,4 @@ int main() {
     cin.tie(0);
     input();
     solve();
-}s
+}
