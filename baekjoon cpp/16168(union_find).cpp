@@ -1,3 +1,64 @@
+// 1번째 풀이
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// 오일러 경로 알고리즘: 경로의 중간에 위치한 모든 정점은 경로에 들어올 때마다 간선을 하나 사용해 들어오고, 나갈 때마다 하나의 간선을 사용한다. 
+// 즉, 중간 정점은 항상 "들어옴"과 "나감"이 한 쌍씩 있어야 하므로, 그 정점의 전체 간선 수(차수)는 짝수가 된다.
+// 따라서 정점으로부터 경로의 개수가 홀수인 정점이이 2개(시작과 끝 정점) 오일러 경로이다.
+// 추가로 홀수인 경로의 개수가 0개 있는(모든 정점의 경로 개수가 짝수라면) 오일러 회로로서 시작 정점과 끝 정점이 같은 경우인데, 오일러 경로를 만족한다고 할 수 있다.
+
+int v, e, cnt = 1;
+vector<int>mat[3001];
+bool vis[3001];
+
+void dfs(int s) {
+    for (auto i : mat[s]) {
+        if (!vis[i]) {
+            vis[i] = 1;
+            cnt++;
+            dfs(i);
+        }
+    }
+}
+
+void solve() {
+    vis[1] = 1;
+    dfs(1);  // 임의의 정점으로부터 모든 정점이 연결되었는지 확인인
+    if (cnt != v) {
+        cout << "NO";
+        return;
+    }
+    int t = 0;
+    for (int i = 1; i <= v; i++) {
+        if (mat[i].size() % 2 == 1)  // 간선 개수가 홀수인 정점 수 체크
+            t++;
+    }
+    if (t == 0 || t == 2)
+        cout << "YES";
+    else
+        cout << "NO";
+}
+
+void input() {
+    cin >> v >> e;
+    for (int i = 0; i < e; i++) {
+        int a, b;
+        cin >> a >> b;
+        mat[a].push_back(b);
+        mat[b].push_back(a);
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    input();
+    solve();
+}
+
+// 2번째 풀이
+
 #include <bits/stdc++.h>
 using namespace std;
 
