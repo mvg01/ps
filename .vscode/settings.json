@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "*.erd": "json",
-        "*.vuerd": "json",
-        "iostream": "cpp"
-    }
-}
