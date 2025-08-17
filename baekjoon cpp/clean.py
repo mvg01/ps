@@ -73,6 +73,8 @@ algo_map = {
 }
 
 exception_list = []
+# 중복 검사를 위해 표준 알고리즘 이름들의 set을 미리 생성
+standard_algo_names = set(algo_map.values())
 
 for f in os.listdir('.'):
     if os.path.isdir(f):
@@ -98,13 +100,27 @@ for f in os.listdir('.'):
         continue
 
     algo = algo_map.get(raw_algo)
+
+    # --- 수정된 부분 ---
+    # 1. 키(key)에서 찾지 못했을 경우,
+    # 2. 이미 표준화된 이름(value)인지 확인
+    if not algo and raw_algo in standard_algo_names:
+        algo = raw_algo
+    # ------------------
+
     if not algo:
         exception_list.append(f + f" (알고리즘명 매핑없음: '{raw_algo}')")
         continue
 
     newfname = f"{num:05d}({algo}).{ext}"
     if f != newfname:
-        os.rename(f, newfname)
+        # 파일이 이미 존재하는지 확인 후 이름 변경 (대소문자 변경 시 필요)
+        if not os.path.exists(newfname):
+            os.rename(f, newfname)
+        # 이미 같은 이름(내용만 다름)이 있는 경우, 덮어쓰지 않도록 처리
+        elif f.lower() != newfname.lower():
+             print(f"경고: '{newfname}' 파일이 이미 존재하여 '{f}' 파일의 이름을 변경할 수 없습니다.")
+
 
 if exception_list:
     print("==== 알고리즘 분류표에 없는(또는 처리 예외) 파일 목록 ====")
