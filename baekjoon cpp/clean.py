@@ -70,6 +70,7 @@ algo_map = {
     'deque': 'deque',
     '해구성하기': 'construct_solution',
     '해 구성하기': 'construct_solution',
+    '애드혹': 'ad_hoc',
 }
 
 exception_list = []
