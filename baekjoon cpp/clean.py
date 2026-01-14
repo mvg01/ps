@@ -72,7 +72,8 @@ algo_map = {
     '해 구성하기': 'construct_solution',
     '애드혹': 'ad_hoc',
     '세그먼트트리': 'segment_tree',
-    '트라이': 'trie'
+    '트라이': 'trie',
+    '게임이론' :'game_theory'
 }
 
 exception_list = []
